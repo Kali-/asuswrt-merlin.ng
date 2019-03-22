@@ -1508,6 +1508,7 @@ extern int get_wl_sta_list(void);
 //extern int get_maxassoc(char *ifname);
 extern int get_psta_status(int unit);
 #endif
+extern int wl_get_bw(int unit);
 #if defined(RTCONFIG_BCMWL6) && defined(RTCONFIG_PROXYSTA)
 extern int get_psta_status(int unit);
 #endif

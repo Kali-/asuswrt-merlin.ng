@@ -470,4 +470,32 @@ void update_macfilter_relist()
 		}
 	}
 }
+
+int wl_get_bw(int unit)
+{
+	char ifname[NVRAM_MAX_PARAM_LEN];
+	int up = 0;
+	chanspec_t chspec = 0;
+	int bw = 0;
+
+	wl_ifname(unit, 0, ifname);
+
+	wl_iovar_getint(ifname, "bss", (int *) &up);
+	wl_iovar_getint(ifname, "chanspec", (int *) &chspec);
+
+	if (up && wf_chspec_valid(chspec)) {
+		if (CHSPEC_IS20(chspec))
+			bw = 20;
+		else if (CHSPEC_IS40(chspec))
+			bw = 40;
+		else if (CHSPEC_IS80(chspec))
+			bw = 80;
+#if defined(RTCONFIG_HND_ROUTER_AX) || defined(RTCONFIG_BW160M)
+		else if (CHSPEC_IS160(chspec))
+			bw = 160;
+#endif
+	}
+
+	return bw;
+}
 #endif
