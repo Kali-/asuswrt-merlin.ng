@@ -175,18 +175,24 @@ function display_clients(clientsarray, obj) {
 			code += '<br><span style="margin-top:-15px; color: cyan;">' + client[4] + ' dBm</td>';	// RSSI
 			code += '<td style="text-align: right;vertical-align:top;">' + client[7] + '</td>';	// Time
 
+			if (client[8] != "" || client[9] != "" || client[10] != "") {
+				code += '<td style="vertical-align:top;">';
+			}
+
 			if (client[8] != "") {
-				code += '<td style="vertical-align:top;">' + client[8] + ' ('+ client[9] +')';	// NSS + PHY
+				code += client[8] + ' ('+ client[9] +')';	// NSS + PHY
 			} else if (client[9] != "") {
-				code += '<td style="vertical-align:top;">' + client[9];	// PHY
-			} else {
-				code += '<td>';
+				code += client[9];	// PHY
 			}
+
 			if (client[10] != "") {
-				code += '<br><span style="margin-top:-15px; color: cyan;">' + client[10] + '</td>';  // BW
-			} else {
-				code += '</td>';
+				code += '<br><span style="margin-top:-15px; color: cyan;">' + client[10];  // BW
 			}
+
+                        if (client[8] != "" || client[9] != "" || client[10] != "") {
+                                code += '</td>';
+                        }
+
 			code += '<td style="vertical-align:top;">' + client[11] + '</td>';	// Flags
 			code += '</tr>';
 		}
@@ -344,7 +350,7 @@ function hide_details_window(){
 									<br><br>
 									<div id="wifi52headerblock"></div>
 									<div id="wifi52block"></div>
-									<div id="flags_mumimo_div" style="display:none;">Flags: <span class="wifiheader">P</span>=Powersave Mode, <span class="wifiheader">S</span>=Short GI, <span class="wifiheader">T</span>=STBC, <span class="wifiheader">M</span>=MU Beamforming,<span class="wifiheader">A</span>=Associated, <span class="wifiheader">U</span>=Authenticated, <span class="wifiheader">G</span>=Guest</div>
+									<div id="flags_mumimo_div" style="display:none;">Flags: <span class="wifiheader">P</span>=Powersave Mode, <span class="wifiheader">S</span>=Short GI, <span class="wifiheader">T</span>=STBC, <span class="wifiheader">M</span>=MU Beamforming, <span class="wifiheader">A</span>=Associated, <span class="wifiheader">U</span>=Authenticated, <span class="wifiheader">G</span>=Guest</div>
 									<div id="flags_div">Flags: <span class="wifiheader">P</span>=Powersave Mode, <span class="wifiheader">S</span>=Short GI, <span class="wifiheader">T</span>=STBC, <span class="wifiheader">A</span>=Associated, <span class="wifiheader">U</span>=Authenticated, <span class="wifiheader">G</span>=Guest</div>
 									<br>
 									<div class="apply_gen">
